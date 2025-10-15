@@ -261,44 +261,41 @@ function createFallRow(fall) {
     const formattedTime = formatDateTime(fall.timestamp);
     
     row.innerHTML = `
-        <td>
+        <td data-label="Timestamp">
             <div class="timestamp">${formattedTime}</div>
         </td>
-        <td>
+        <td data-label="Location">
             <span class="badge bg-secondary">
                 <i class="fas fa-location-dot me-1"></i>
                 ${fall.location}
             </span>
         </td>
-        <td>
-            <span class="badge bg-secondary">
-                <i class="fas fa-microchip me-1"></i>
-                ${fall.person_id}
-            </span>
-        </td>
-        <td>
+        <td data-label="Device">${fall.person_id}</td>
+        <td data-label="Method">
             <span class="badge bg-info">
                 <i class="fas fa-brain me-1"></i>
                 ${fall.detection_method || 'Motion'}
             </span>
         </td>
-        <td>
+        <td data-label="Confidence">
             <span class="badge ${severityClass}">
-                ${fall.confidence}
+                ${fall.confidence}%
             </span>
         </td>
-        <td>${fall.duration}s</td>
-        <td>
-            <button class="btn btn-sm btn-outline-primary me-1" 
-                    onclick="viewFallDetail('${fall.id}')">
-                <i class="fas fa-eye"></i>
-                View
-            </button>
-            <button class="btn btn-sm btn-outline-success" 
-                    onclick="playVideo('${fall.video_url}', '${fall.id}')">
-                <i class="fas fa-play"></i>
-                Video
-            </button>
+        <td data-label="Duration">${fall.duration}s</td>
+        <td data-label="Actions">
+            <div class="action-buttons">
+                <button class="btn btn-sm btn-outline-primary me-1" 
+                        onclick="viewFallDetail('${fall.id}')">
+                    <i class="fas fa-eye"></i>
+                    <span class="btn-text">View</span>
+                </button>
+                <button class="btn btn-sm btn-outline-success" 
+                        onclick="playVideo('${fall.video_url}', '${fall.id}')">
+                    <i class="fas fa-play"></i>
+                    <span class="btn-text">Video</span>
+                </button>
+            </div>
         </td>
     `;
     

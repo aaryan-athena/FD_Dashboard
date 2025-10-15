@@ -20,24 +20,29 @@
                             <i class="fas fa-shield-alt me-2"></i>
                             Fall Detection Dashboard
                         </a>
-                        <span class="navbar-text">
-                            <i class="fas fa-clock me-1"></i>
-                            Last Updated: <span id="lastUpdated"></span>
-                        </span>
+                        <div class="d-flex align-items-center gap-3">
+                            <button class="btn btn-sm theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+                                <i class="fas fa-moon" id="themeIcon"></i>
+                            </button>
+                            <span class="navbar-text">
+                                <i class="fas fa-clock me-1"></i>
+                                Last Updated: <span id="lastUpdated"></span>
+                            </span>
+                        </div>
                     </div>
                 </nav>
             </div>
         </div>
 
         <!-- Stats Cards -->
-        <div class="row mb-4">
-            <div class="col-md-3 col-sm-6 mb-3">
-                <div class="card stat-card bg-danger text-white">
+        <div class="row mb-4 g-3">
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="card-title text-white">{{ stats.today }}</h4>
-                                <p class="card-text">Falls Today</p>
+                                <p class="card-text mb-2">Falls Today</p>
+                                <h4 class="card-title text-white mb-0">{{ stats.today }}</h4>
                             </div>
                             <div class="stat-icon">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -46,28 +51,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
-                <div class="card stat-card bg-warning text-white">
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card text-white" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="card-title text-white">{{ stats.this_week }}</h4>
-                                <p class="card-text">This Week</p>
+                                <p class="card-text mb-2" style="color: #8b4513;">This Week</p>
+                                <h4 class="card-title mb-0" style="color: #8b4513;">{{ stats.this_week }}</h4>
                             </div>
-                            <div class="stat-icon">
+                            <div class="stat-icon" style="color: #8b4513;">
                                 <i class="fas fa-calendar-week"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
-                <div class="card stat-card bg-info text-white">
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card text-white" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="card-title text-white">{{ stats.this_month }}</h4>
-                                <p class="card-text">This Month</p>
+                                <p class="card-text mb-2">This Month</p>
+                                <h4 class="card-title text-white mb-0">{{ stats.this_month }}</h4>
                             </div>
                             <div class="stat-icon">
                                 <i class="fas fa-calendar-alt"></i>
@@ -76,13 +81,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
-                <div class="card stat-card bg-success text-white">
+            <div class="col-lg-3 col-md-6">
+                <div class="card stat-card text-white" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h4 class="card-title text-white">{{ stats.total }}</h4>
-                                <p class="card-text">Total Falls</p>
+                                <p class="card-text mb-2">Total Falls</p>
+                                <h4 class="card-title text-white mb-0">{{ stats.total }}</h4>
                             </div>
                             <div class="stat-icon">
                                 <i class="fas fa-chart-bar"></i>
@@ -94,12 +99,12 @@
         </div>
 
         <!-- Charts Row -->
-        <div class="row mb-4">
-            <div class="col-md-8">
+        <div class="row mb-4 g-3">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">
-                            <i class="fas fa-chart-line me-2"></i>
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-line me-2" style="color: #667eea;"></i>
                             Fall Detection Timeline (Last 30 Days)
                         </h5>
                     </div>
@@ -108,26 +113,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">
-                            <i class="fas fa-chart-pie me-2"></i>
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-pie me-2" style="color: #667eea;"></i>
                             Severity Distribution
                         </h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="height: 180px;">
                         <canvas id="severityChart"></canvas>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">
-                            <i class="fas fa-map-marker-alt me-2"></i>
+                        <h5 class="card-title">
+                            <i class="fas fa-map-marker-alt me-2" style="color: #667eea;"></i>
                             Location Distribution
                         </h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="height: 180px;">
                         <canvas id="locationChart"></canvas>
                     </div>
                 </div>
@@ -138,13 +143,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-list me-2"></i>
+                            <i class="fas fa-list me-2" style="color: #667eea;"></i>
                             Recent Falls
                         </h5>
-                        <button class="btn btn-outline-primary btn-sm" onclick="refreshData()">
-                            <i class="fas fa-refresh me-1"></i>
+                        <button class="btn btn-outline-primary btn-sm mt-2 mt-md-0" onclick="refreshData()">
+                            <i class="fas fa-sync-alt me-1"></i>
                             Refresh
                         </button>
                     </div>
@@ -165,41 +170,43 @@
                                 <tbody>
                                     {% for fall in falls %}
                                     <tr>
-                                        <td>
+                                        <td data-label="Timestamp">
                                             <div class="timestamp">
                                                 {{ fall.timestamp | format_datetime }}
                                             </div>
                                         </td>
-                                        <td>
+                                        <td data-label="Location">
                                             <span class="badge bg-secondary">
                                                 <i class="fas fa-location-dot me-1"></i>
                                                 {{ fall.location }}
                                             </span>
                                         </td>
-                                        <td>{{ fall.person_id }}</td>
-                                        <td>
+                                        <td data-label="Device">{{ fall.person_id }}</td>
+                                        <td data-label="Method">
                                             <span class="badge bg-info">
                                                 <i class="fas fa-brain me-1"></i>
                                                 {{ fall.detection_method or 'Motion' }}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td data-label="Confidence">
                                             <span class="badge severity-{{ fall.severity.lower() }}">
                                                 {{ fall.confidence }}%
                                             </span>
                                         </td>
-                                        <td>{{ fall.duration }}s</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary me-1" 
-                                                    onclick="viewFallDetail('{{ fall.id }}')">
-                                                <i class="fas fa-eye"></i>
-                                                View
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-success" 
-                                                    onclick="playVideo('{{ fall.video_url }}', '{{ fall.id }}')">
-                                                <i class="fas fa-play"></i>
-                                                Video
-                                            </button>
+                                        <td data-label="Duration">{{ fall.duration }}s</td>
+                                        <td data-label="Actions">
+                                            <div class="action-buttons">
+                                                <button class="btn btn-sm btn-outline-primary me-1" 
+                                                        onclick="viewFallDetail('{{ fall.id }}')">
+                                                    <i class="fas fa-eye"></i>
+                                                    <span class="btn-text">View</span>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success" 
+                                                        onclick="playVideo('{{ fall.video_url }}', '{{ fall.id }}')">
+                                                    <i class="fas fa-play"></i>
+                                                    <span class="btn-text">Video</span>
+                                                </button>
+                                            </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -260,8 +267,43 @@
         const dashboardDataElement = document.getElementById('dashboard-data');
         const dashboardData = JSON.parse(dashboardDataElement.textContent);
         
+        // Theme Management
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const themeIcon = document.getElementById('themeIcon');
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+        
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            html.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+        
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
             initializeCharts(dashboardData.stats);
             updateLastUpdated();
             
