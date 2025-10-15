@@ -16,9 +16,9 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="/">
-                            <i class="fas fa-shield-alt me-2"></i>
-                            Fall Detection Dashboard
+                        <a class="navbar-brand d-flex align-items-center" href="/">
+                            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Fall Detection Logo" class="navbar-logo me-2">
+                            <span class="navbar-title">Fall Detection Dashboard</span>
                         </a>
                         <div class="d-flex align-items-center gap-3">
                             <button class="btn btn-sm theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">

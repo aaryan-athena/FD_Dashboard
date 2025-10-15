@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +15,21 @@
             <div class="col-12">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="/">
-                            <i class="fas fa-arrow-left me-2"></i>
-                            Fall Detection Dashboard
+                        <a class="navbar-brand d-flex align-items-center" href="/">
+                            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Fall Detection Logo" class="navbar-logo me-2">
+                            <span class="navbar-title">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Back to Dashboard
+                            </span>
                         </a>
-                        <span class="navbar-text">
-                            Fall Details: {{ fall.id }}
-                        </span>
+                        <div class="d-flex align-items-center gap-3">
+                            <button class="btn btn-sm theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+                                <i class="fas fa-moon" id="themeIcon"></i>
+                            </button>
+                            <span class="navbar-text">
+                                Fall ID: {{ fall.id }}
+                            </span>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -310,8 +318,43 @@
             URL.revokeObjectURL(url);
         }
         
-        // Auto-load video when page loads
+        // Theme Management
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const themeIcon = document.getElementById('themeIcon');
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+        
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            html.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+        
+        // Auto-load video and theme when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
             loadVideo();
         });
     </script>
@@ -330,7 +373,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: #dee2e6;
+            background: var(--border-color);
         }
         
         .timeline-item {
@@ -345,19 +388,24 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 0 0 2px #dee2e6;
+            border: 3px solid var(--card-bg);
+            box-shadow: 0 0 0 2px var(--border-color);
         }
         
         .timeline-title {
             font-weight: 600;
             margin-bottom: 5px;
+            color: var(--text-primary);
         }
         
         .timeline-time {
             font-size: 0.9rem;
-            color: #6c757d;
+            color: var(--text-muted);
             margin-bottom: 5px;
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
         }
         
         /* Info Groups */
@@ -369,12 +417,13 @@
         
         .info-label {
             font-weight: 600;
-            color: #495057;
+            color: var(--text-primary);
             margin-bottom: 0;
         }
         
         .info-value {
             font-weight: 500;
+            color: var(--text-primary);
         }
         
         /* Status Items */
@@ -382,6 +431,43 @@
             display: flex;
             align-items: center;
             font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        
+        /* Video Player */
+        video {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+        }
+        
+        /* Dark Theme Specific */
+        html[data-theme="dark"] .timeline-marker {
+            border-color: var(--card-bg);
+        }
+        
+        html[data-theme="dark"] .text-muted {
+            color: var(--text-secondary) !important;
+        }
+        
+        html[data-theme="dark"] .progress {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .info-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .navbar-title {
+                font-size: 0.9rem;
+            }
+            
+            .navbar-title i {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </body>

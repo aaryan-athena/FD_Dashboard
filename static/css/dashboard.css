@@ -170,6 +170,7 @@ body {
 .table tbody tr {
     transition: all 0.2s ease;
     border-bottom: 1px solid var(--border-color);
+    background: var(--card-bg);
 }
 
 .table-hover tbody tr:hover {
@@ -182,6 +183,7 @@ body {
     vertical-align: middle;
     padding: 1rem;
     color: var(--text-primary);
+    background: transparent;
 }
 
 /* Responsive Table for Mobile */
@@ -1242,5 +1244,63 @@ html[data-theme="dark"] .badge.bg-info {
     
     .empty-state i {
         font-size: 3rem;
+    }
+}
+
+/* Navbar Logo Styling */
+.navbar-logo {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.navbar-brand:hover .navbar-logo {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.navbar-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Responsive Navbar Logo */
+@media (max-width: 576px) {
+    .navbar-logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .navbar-title {
+        font-size: 1rem;
+    }
+}
+
+/* Dark Theme Table Row Background Fix */
+html[data-theme="dark"] .table tbody tr {
+    background: var(--card-bg);
+}
+
+html[data-theme="dark"] .table td {
+    background: transparent;
+}
+
+html[data-theme="dark"] .table-hover tbody tr:hover {
+    background: var(--table-hover-bg);
+}
+
+/* Dark Theme Mobile Table Cards */
+@media (max-width: 768px) {
+    html[data-theme="dark"] .table tbody tr {
+        background: var(--card-bg);
+        border-color: var(--border-color);
     }
 }
