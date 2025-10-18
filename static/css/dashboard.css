@@ -1249,10 +1249,12 @@ html[data-theme="dark"] .badge.bg-info {
 
 /* Navbar Logo Styling */
 .navbar-logo {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     transition: transform 0.3s ease;
+    object-fit: cover;
 }
 
 .navbar-brand {
@@ -1272,15 +1274,40 @@ html[data-theme="dark"] .badge.bg-info {
     font-size: 1.5rem;
 }
 
+/* Navbar Navigation Links */
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 600;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white !important;
+}
+
 /* Responsive Navbar Logo */
 @media (max-width: 576px) {
     .navbar-logo {
-        width: 32px;
-        height: 32px;
+        width: 35px;
+        height: 35px;
     }
     
     .navbar-title {
         font-size: 1rem;
+    }
+    
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1rem !important;
+        margin: 0.25rem 0;
     }
 }
 

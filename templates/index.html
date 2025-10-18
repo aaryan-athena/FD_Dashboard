@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteadyMatch - Fall Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="SteadyMatch Logo" class="navbar-logo me-2">
+                <span class="brand-name">SteadyMatch</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-lg-3" href="/dashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Go to Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">
+                            <span class="gradient-text">SteadyMatch</span>
+                        </h1>
+                        <p class="hero-subtitle">Smart Fall Detection for Safer Living</p>
+                        <p class="hero-description">
+                            A reliable support system designed to make every second count. Powered by AI and built with empathy.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="/dashboard" class="btn btn-hero-primary">
+                                <i class="fas fa-rocket me-2"></i>
+                                View Dashboard
+                            </a>
+                            <a href="#about" class="btn btn-hero-secondary">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Learn More
+                            </a>
+                        </div>
+                        <div class="hero-stats mt-5">
+                            <div class="stat-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h3>24/7</h3>
+                                    <p>Monitoring</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h3>&lt;2s</h3>
+                                    <p>Response Time</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-brain"></i>
+                                <div>
+                                    <h3>AI-Powered</h3>
+                                    <p>Detection</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="floating-card">
+                            <i class="fas fa-heartbeat"></i>
+                            <div>
+                                <h4>Real-Time Monitoring</h4>
+                                <p>Instant fall detection</p>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="SteadyMatch System" class="main-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">
+                    <span class="gradient-text">About SteadyMatch</span>
+                </h2>
+                <p class="section-subtitle">More than just technology - it's peace of mind</p>
+            </div>
+            
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="about-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-heart me-2" style="color: #f5576c;"></i>
+                            Our Story
+                        </h3>
+                        <p class="lead">
+                            SteadyMatch is a smart fall-detection solution designed to bring <strong>safety, speed, and peace of mind</strong> to caregiving.
+                        </p>
+                        <p>
+                            Connected to a Raspberry Pi and powered by a <strong>"You Only Look Once" (YOLO)</strong> model, the app instantly detects when a person falls. Within seconds, it captures and saves a 10-second video clip—five seconds before and after the incident—and alerts the primary caregiver. This ensures help arrives fast, with the context of the situation clearly visible.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="feature-image-container">
+                        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Technology" class="feature-image">
+                        <div class="floating-badge badge-1">
+                            <i class="fas fa-video"></i>
+                            <span>10s Video Clips</span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <div class="about-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-lightbulb me-2" style="color: #ffd700;"></i>
+                            The Inspiration
+                        </h3>
+                        <p>
+                            The inspiration behind SteadyMatch came from a personal story—<strong>a grandfather's fall that went unnoticed</strong>. That moment highlighted a widespread problem among senior citizens: the fear of falling and the stress it brings to both residents and caregivers.
+                        </p>
+                        <p>
+                            By combining <strong>engineering with empathy</strong>, SteadyMatch was built to make caregiving proactive rather than reactive, empowering seniors to live freely and caregivers to respond with confidence.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h4>Our Mission</h4>
+                        <p>To create a world where seniors can live independently with dignity, knowing that help is always just seconds away when they need it most.</p>
+                        <div class="mission-values">
+                            <span class="value-badge"><i class="fas fa-check"></i> Safety First</span>
+                            <span class="value-badge"><i class="fas fa-check"></i> Empathy Driven</span>
+                            <span class="value-badge"><i class="fas fa-check"></i> Innovation Powered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">
+                    <span class="gradient-text">Key Features</span>
+                </h2>
+                <p class="section-subtitle">Making every second count with advanced technology</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered Detection</h3>
+                        <p>YOLO model ensures accurate and instant fall detection with minimal false positives.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Video Recording</h3>
+                        <p>Captures 10-second clips (5s before & after) to provide complete context of the incident.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3>Instant Updates</h3>
+                        <p>Real-time updates shown in dashboard to caregivers the moment a fall is detected.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>24/7 Monitoring</h3>
+                        <p>Continuous surveillance ensures protection around the clock, every day.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics Dashboard</h3>
+                        <p>Track incidents, view statistics, and analyze patterns over time.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Privacy Protected</h3>
+                        <p>Secure data storage and transmission to protect resident privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">
+                    <span class="gradient-text">How It Works</span>
+                </h2>
+                <p class="section-subtitle">Simple, effective, and reliable</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h4>Continuous Monitoring</h4>
+                        <p>Raspberry Pi camera monitors the environment 24/7</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>AI Detection</h4>
+                        <p>YOLO model instantly recognizes fall patterns</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>Video Capture</h4>
+                        <p>Records 10-second clip with full context</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">
+                            <i class="fas fa-dashboard"></i>
+                        </div>
+                        <h4>Fall Dashboard</h4>
+                        <p>Caregiver gets instant Update</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="cta-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <h2 class="cta-title">Ready to Experience Peace of Mind?</h2>
+                        <p class="cta-description">View real-time fall detection data and analytics on our comprehensive dashboard.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="/dashboard" class="btn btn-cta">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Open Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="SteadyMatch" class="footer-logo me-2">
+                        <span class="footer-brand">SteadyMatch</span>
+                    </div>
+                    <p class="footer-tagline mt-2 mb-0">Making every second count</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">
+                        &copy; 2025 SteadyMatch. Built with <i class="fas fa-heart text-danger"></i> for safer living.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .process-step, .about-content').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

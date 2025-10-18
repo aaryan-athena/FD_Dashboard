@@ -17,14 +17,33 @@
                 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
                     <div class="container-fluid">
                         <a class="navbar-brand d-flex align-items-center" href="/">
-                            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Fall Detection Logo" class="navbar-logo me-2">
-                            <span class="navbar-title">Fall Detection Dashboard</span>
+                            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="SteadyMatch Logo" class="navbar-logo me-2">
+                            <span class="navbar-title">SteadyMatch Dashboard</span>
                         </a>
-                        <div class="d-flex align-items-center gap-3">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarContent">
+                            <ul class="navbar-nav ms-auto align-items-center">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/">
+                                        <i class="fas fa-home me-1"></i>
+                                        Home
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="/dashboard">
+                                        <i class="fas fa-tachometer-alt me-1"></i>
+                                        Dashboard
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 ms-3">
                             <button class="btn btn-sm theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
                                 <i class="fas fa-moon" id="themeIcon"></i>
                             </button>
-                            <span class="navbar-text">
+                            <span class="navbar-text d-none d-md-inline-block">
                                 <i class="fas fa-clock me-1"></i>
                                 Last Updated: <span id="lastUpdated"></span>
                             </span>

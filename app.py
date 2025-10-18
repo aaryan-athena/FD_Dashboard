@@ -320,6 +320,11 @@ def calculate_stats(falls_data):
     return stats
 
 @app.route('/')
+def home():
+    """Home page route"""
+    return render_template('index.html')
+
+@app.route('/dashboard')
 def dashboard():
     """Main dashboard route"""
     falls_data = firebase_service.get_all_falls()
