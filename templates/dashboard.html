@@ -53,6 +53,9 @@
             </div>
         </div>
 
+        <!-- Notification Container -->
+        <div id="notificationContainer" class="notification-container"></div>
+
         <!-- Stats Cards -->
         <div class="row mb-4 g-3">
             <div class="col-lg-3 col-md-6">
@@ -280,11 +283,133 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-    <script type="application/json" id="dashboard-data">{{ {'stats': stats, 'falls': falls} | tojson | safe }}</script>
+    <script type="application/json" id="dashboard-data">{{ {'stats': stats, 'falls': falls, 'mock_mode': mock_mode} | tojson | safe }}</script>
     <script>
         // Initialize dashboard with server data
         const dashboardDataElement = document.getElementById('dashboard-data');
         const dashboardData = JSON.parse(dashboardDataElement.textContent);
+        
+        // Notification System
+        let lastFallCount = dashboardData.stats.total;
+        let notificationSound = null;
+        
+        function createNotification(fall) {
+            console.log('createNotification called with:', fall);
+            const container = document.getElementById('notificationContainer');
+            console.log('Notification container:', container);
+            
+            if (!container) {
+                console.error('Notification container not found!');
+                return;
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString();
+            
+            notification.innerHTML = `
+                <div class="notification-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">⚠️ Fall Detected!</div>
+                    <div class="notification-message">
+                        Location: ${fall.location}<br>
+                        Confidence: ${fall.confidence}%
+                    </div>
+                    <div class="notification-time">${timeStr}</div>
+                </div>
+                <button class="notification-close" onclick="closeNotification(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(notification);
+            console.log('Notification added to container');
+            
+            // Play notification sound (optional)
+            try {
+                if (!notificationSound) {
+                    notificationSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGS57OihUQ0QT6Lh8LNnGwU7kdTz0HwwBSh+zPDalj4KFV+06eiqVhALSKDh8r1rIAUsgs7y2Ik1CBhlue3ooVEMEE+i4e+0aB0GO5HU89B8MAUofszw2pY+ChVftOnpq1YQC0mf4fK8ayAFLIHO8tiJNQgYZLnt6KFRCxBPouHvtGkcBjuR1PPQfDAFKH/M8NqWPwoVX7Tp6atWEAtJn+HyvGsgBSyCzvLYiTUIGWW57eihUQsQT6Lh77RpHAY7kdTz0HwwBSh/zPDalj4KFV+06emrVhALSZ/h8rxrIAUsgc7y2Ik1CBllue3ooVELEE+i4e+0aRwGO5HU89B8MAUof8zw2pY+ChVftOnpq1YQC0mf4fK8ayAFLIHO8tiJNQgZZbnt6KFRCxBPouHvtGkcBjuR1PPQfDAFKH/M8NqWPgoVX7Tp6atWEAtJn+HyvGsgBSyCzvLYiTUIGWW57eihUQsQT6Lh77RpHAY7kdTz0HwwBSh/zPDalj4KFV+06emrVhALSZ/h8rxrIAUsgc7y2Ik1CBllue3ooVELEE+i4e+0aRwGO5HU89B8MAUof8zw2pY+ChVftOnpq1YQC0mf4fK8ayAFLIHO8tiJNQgZZbnt6KFRCxBPouHvtGkcBjuR1PPQfDAFKH/M8NqWPgoVX7Tp6atWEAtJn+HyvGsgBSyCzvLYiTUIGWW57eihUQsQT6Lh77RpHAY7kdTz0HwwBSh/zPDalj4KFV+06emrVhALSZ/h8rxrIAUsgs7y2Ik1CBlluezooVELEE+i4e+0aRwGO5HU89B8MAUof8zw2pY+ChVftOnpq1YQC0mf4fK8ayAFLILO8tiJNQgZZbnt6KFRCxBPouHvtGkcBjuR1PPQfDAFKH/M8NqWPgoVX7Tp6atWEAtJn+HyvGsgBSyCzvLYiTUIGWW57eihUQsQT6Lh77RpHAY7kdTz0HwwBSh/zPDalj4KFV+06emrVhALSZ/h8rxrIAUsgs7y2Ik1CBlluezooVELEE+i4e+0aRwGO5HU89B8MAUof8zw2pY+ChVftOnpq1YQC0mf4fK8ayAFLILO8tiJNQgZZbnt6KFRCxBPouHvtGkcBjuR1PPQfDAFKH/M8NqWPgoVX7Tp6atWEAtJn+HyvGsgBQ==');
+                }
+                notificationSound.play().catch(e => console.log('Audio play failed:', e));
+            } catch (e) {
+                console.log('Audio not supported:', e);
+            }
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('hiding');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 5000);
+        }
+        
+        function closeNotification(button) {
+            const notification = button.closest('.notification');
+            notification.classList.add('hiding');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }
+        
+        // Check for new falls
+        async function checkForNewFalls() {
+            try {
+                const response = await fetch('/api/stats');
+                const stats = await response.json();
+                
+                if (stats.total > lastFallCount) {
+                    // New fall detected, fetch latest fall data
+                    const fallsResponse = await fetch('/api/falls?page=1&per_page=1');
+                    const fallsData = await fallsResponse.json();
+                    
+                    if (fallsData.falls && fallsData.falls.length > 0) {
+                        createNotification(fallsData.falls[0]);
+                        lastFallCount = stats.total;
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking for new falls:', error);
+            }
+        }
+        
+        // Show initial notification for mock mode
+        function showMockNotification() {
+            console.log('showMockNotification called');
+            console.log('Mock mode:', dashboardData.mock_mode);
+            console.log('Falls data:', dashboardData.falls);
+            
+            if (dashboardData.mock_mode === true) {
+                if (dashboardData.falls && dashboardData.falls.length > 0) {
+                    const latestFall = dashboardData.falls[0];
+                    console.log('Creating notification for fall:', latestFall);
+                    setTimeout(() => {
+                        createNotification(latestFall);
+                    }, 1000);
+                } else {
+                    console.log('No falls data available');
+                }
+            } else {
+                console.log('Not in mock mode, skipping mock notification');
+            }
+        }
+        
+        // Also show notification for real data on first load
+        function showInitialNotification() {
+            console.log('showInitialNotification called');
+            // Show notification for the latest fall on page load (both mock and real)
+            if (dashboardData.falls && dashboardData.falls.length > 0) {
+                const latestFall = dashboardData.falls[0];
+                console.log('Creating initial notification for fall:', latestFall);
+                setTimeout(() => {
+                    createNotification(latestFall);
+                }, 2000);
+            }
+        }
         
         // Theme Management
         function toggleTheme() {
@@ -322,9 +447,18 @@
         
         // Initialize charts when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded');
+            console.log('Dashboard data:', dashboardData);
+            
             loadTheme();
             initializeCharts(dashboardData.stats);
             updateLastUpdated();
+            
+            // Show notification for the latest fall (works for both mock and real data)
+            showInitialNotification();
+            
+            // Check for new falls every 10 seconds
+            setInterval(checkForNewFalls, 10000);
             
             // Refresh data every 30 seconds
             setInterval(refreshData, 30000);

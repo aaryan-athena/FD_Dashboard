@@ -329,7 +329,7 @@ def dashboard():
     """Main dashboard route"""
     falls_data = firebase_service.get_all_falls()
     stats = calculate_stats(falls_data)
-    return render_template('dashboard.html', falls=falls_data[:10], stats=stats)
+    return render_template('dashboard.html', falls=falls_data[:10], stats=stats, mock_mode=firebase_service.mock_mode)
 
 @app.route('/api/falls')
 def api_falls():
